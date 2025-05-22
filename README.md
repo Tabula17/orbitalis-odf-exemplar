@@ -8,6 +8,8 @@
 
 Procesador asíncrono de documentos ODF (OpenDocument Format) en PHP, optimizado para alto rendimiento y operaciones concurrentes usando Swoole.
 
+Adaptación de la librería [`satelles-odf-relatio`](https://github.com/Tabula17/orbitalis-odf-exemplar) para un procesamiento más eficiente y moderno.
+
 ## Características principales
 
 - **Procesamiento concurrente de documentos ODF**
@@ -67,11 +69,11 @@ $channel = $processor->processConcurrent(/* canal o jobs */);
 ```
 src/ — Código fuente principal (componentes, core, resolvers, funciones)
    ├── Components/
-   │    ├── IO/
-   │    │   ├── AsyncFileContainer.php (Gestor de archivos)
-   │    │   └── AsyncZipManager.php (Gestor de archivos ZIP)
-   │    ├── Job.php (Clase base para trabajos)
-   │    └── Template/
+   │   ├── IO/
+   │   │   ├── AsyncFileContainer.php (Gestor de archivos)
+   │   │   └── AsyncZipManager.php (Gestor de archivos ZIP)
+   │   ├── Job.php (Clase base para trabajos)
+   │   └── Template/
    │        └── AsyncTemplateEngine.php (Motor de plantillas)
    ├── Core/
    │   └── AsyncODFProcessor.php (Clase principal)
@@ -83,7 +85,7 @@ examples/ — Ejemplos de uso y pruebas
    │── run.php (Ejemplo básico)
    ├── media/ (Imágenes y datos de ejemplo)
    │   └── Data.php (Generador de datos aleatorios)
-   ├── aves/ 
+   ├── Saves/ 
    │   └── (Reportes generados)
    ├── templates/ (Plantillas utilizadas)
    │   ├── Report.odt (Plantilla de ejemplo)
@@ -93,15 +95,9 @@ examples/ — Ejemplos de uso y pruebas
 
 ```
 
-- `src/` — Código fuente principal (componentes, core, resolvers, funciones)
-- `examples/` — Ejemplos de uso y pruebas
-
 ## Dependencias principales
 
-- `xvii/satelles-odf-relatio`
-- `xvii/satelles-xml-frater`
-- `xvii/satelles-securitas`
-- `phpxmlrpc/phpxmlrpc`
+- `xvii/satelles-odf-relatio`: Procesador de plantillas ODF.
 
 ## Sugerencias de uso
 
