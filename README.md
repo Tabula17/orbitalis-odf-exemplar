@@ -8,7 +8,7 @@
 
 Procesador asíncrono de documentos ODF (OpenDocument Format) en PHP, optimizado para alto rendimiento y operaciones concurrentes usando Swoole.
 
-Adaptación de la librería [`satelles-odf-relatio`](https://github.com/Tabula17/orbitalis-odf-exemplar) para un procesamiento más eficiente y moderno.
+Adaptación de la librería [`satelles-odf-relatio`](https://github.com/Tabula17/stelles-odf-relatio) para un procesamiento más eficiente y moderno.
 
 ## Características principales
 
