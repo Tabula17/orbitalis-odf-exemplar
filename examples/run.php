@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 require __DIR__ . '/../vendor/autoload.php';
-include __DIR__ . '/../vendor/media/data.php';
+include __DIR__ . '/../examples/media/Data.php';
 const VERBOSE = true;
 use Random\RandomException;
 use Swoole\Coroutine\Channel;
@@ -32,7 +32,7 @@ $processor = new AsyncODFProcessor(
     $container, $templateEngine, $zipManager
 );
 $init = microtime(true);
-echo 'Fetching data-> ' . $init . PHP_EOL;
+echo 'Mocking data-> ' . $init . PHP_EOL;
 // Procesamiento concurrente
 $jobs = [];
 $batchId = uniqid('batch_', true);
@@ -52,7 +52,8 @@ foreach ($resolvers as $name => $resolver) {
     $processor->addResolver($resolver->exporterName, $resolver);
 }
 
-$jobsLimit = 5;
+$jobsLimit = 15;
+echo 'Data for ' . $jobsLimit . '  Jobs'.PHP_EOL;
 
 for ($i = 1; $i <= $jobsLimit; $i++) {
     try {
@@ -99,21 +100,19 @@ Coroutine\run(function () use ($channel) {
     // while (true) {
     $queue = $channel->stats()['queue_num'];
     while ($queue > 0) {
-        if ($queue > 0) {
-            /**
-             * @var Job $result
-             */
-            $result = $channel->pop();
-            // echo "co ->" . var_export($channel->stats(), true) . PHP_EOL;
-            if ($result->success === true) {
-                $res = var_export($result->results, true);
-                echo "Documento {$result->id} procesado: {$res}\n";
-                echo "Creado en {$result->createdAt} y terminado en {$result->completedAt}\n";
-            } else {
-                echo "Error en {$result->id}: {$result->errorMessage}\n";
-            }
-            $queue = $channel->stats()['queue_num'];
+        /**
+         * @var Job $result
+         */
+        $result = $channel->pop();
+        // echo "co ->" . var_export($channel->stats(), true) . PHP_EOL;
+        if ($result->success === true) {
+            $res = var_export($result->results, true);
+            echo "Documento {$result->id} procesado: {$res}\n";
+            echo "Creado en {$result->createdAt} y terminado en {$result->completedAt}\n";
+        } else {
+            echo "Error en {$result->id}: {$result->errorMessage}\n";
         }
+        $queue = $channel->stats()['queue_num'];
     }
 });
 $elapsed = (microtime(true) - $start);

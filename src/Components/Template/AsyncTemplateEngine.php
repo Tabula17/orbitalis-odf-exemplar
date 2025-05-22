@@ -40,38 +40,18 @@ class AsyncTemplateEngine
     public function renderAsync(array $data, string $tempDir): Generator
     {
         // Primera pausa para cooperación
-        yield Coroutine::sleep(0.001);
+        yield Coroutine::sleep(0.01);
 
         try {
-            //$this->templateProcessor->setData($data);
             $this->templateProcessor->renderer->functions->workingDir = $tempDir;
             // Procesamiento en paralelo con espera controlada
             $this->templateProcessor->processTemplate($this->container->getPart(XmlMemberPath::CONTENT), $data);
+            yield Coroutine::sleep(0.01);
             $this->templateProcessor->processTemplate($this->container->getPart(XmlMemberPath::STYLES), $data);
 
             return true;
         } catch (\Throwable $e) {
             throw new RuntimeException("Template rendering failed: " . $e->getMessage().PHP_EOL.$e->getTraceAsString());
         }
-    }
-
-    /**
-     * Procesa un archivo XML individual
-     * @throws StrictValueConstraintException
-     * @throws Exception
-     */
-    private function processXmlAsync(string $xmlPath, array $data): Generator
-    {
-        // Leer contenido del archivo (no bloqueante)
-        $content = yield Coroutine::readFile($xmlPath);
-        // Crear objeto XML
-        $xml = new XmlPart($content);
-        // Procesar plantilla (operación CPU-bound)
-        $this->templateProcessor->processTemplate($xml, $data);
-
-        // Escribir cambios (no bloqueante)
-        yield Coroutine::writeFile($xmlPath, $xml->asXml());
-
-        return true;
     }
 }
