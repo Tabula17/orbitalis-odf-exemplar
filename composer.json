@@ -1,0 +1,56 @@
+{
+  "name": "xvii/orbitalis-odf-exemplar",
+  "description": "Procesador de templates en openoffice.",
+  "license":     "MIT",
+  "homepage":    "https://github.com/Tabula17/satelles-odf-relatio",
+  "keywords":    ["reports", "template", "odf", "openoffice", "jodreports"],
+  "authors": [
+    {"name": "Martín Emilio Panizzo"}
+  ],
+  "extra": {
+    "branch-alias": {
+      "dev-main": "1.0.x-dev"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Tabula17\\Orbitalis\\Odf\\Co\\": "src/"
+    }
+  },
+  "repositories": [
+    {"type": "composer", "url": "https://tabula17.repo.repman.io"}
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "xvii/satelles-odf-relatio": "^1.0",
+    "xvii/satelles-xml-frater": "^1.0",
+    "xvii/satelles-securitas": "^1.0",
+    "php": ">=8.4",
+    "ext-zip": "*",
+    "ext-fileinfo": "*",
+    "ext-swoole": ">=5.0",
+    "ext-dom": "*",
+    "ext-simplexml": "*"
+  },
+  "require-dev": {
+    "picqer/php-barcode-generator": "^3.2",
+    "endroid/qr-code": "^6.0",
+    "symfony/mailer": "^7.2",
+    "nette/mail": "^4.0",
+    "symfony/google-mailer": "^7.2",
+    "josh-gaby/cups-ipp": "^0.6.2",
+    "phpxmlrpc/phpxmlrpc": "^4.11"
+  },
+  "suggest": {
+    "phpxmlrpc/phpxmlrpc": "XML-RPC client for PHP (Used in UnoServer remote calls)",
+    "picqer/php-barcode-generator": "Generate barcodes to use in templates",
+    "endroid/qr-code": "Generate QRs to use in templates",
+    "symfony/mailer": "Send generated reports by email",
+    "nette/mail": "Send generated reports by email",
+    "josh-gaby/cups-ipp": "Send generated reports direct to printer",
+    "ext-bcmath": "Barcode IMB (Intelligent Mail Barcode) needs bcmath extension",
+    "ext-gd": "For JPG and PNG generators, GD or Imagick is required",
+    "ext-imagick": "For JPG and PNG generators, GD or Imagick is required"
+  }
+}

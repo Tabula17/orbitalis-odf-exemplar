@@ -1,0 +1,14 @@
+composer.phar
+/vendor/
+.idea
+*.iml
+out
+gen
+/Untrack/
+/examples/saves/*
+/examples/streamsaves/*
+/examples/tmp/*.pdf
+/examples/tmp/*.odt
+/examples/tmp/*.svg
+/examples/tmp/*.jpg
+/examples/tmp/*.png
